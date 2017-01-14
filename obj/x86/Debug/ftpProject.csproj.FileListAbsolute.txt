@@ -1,0 +1,10 @@
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Debug\ftpProject.exe
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Debug\ftpProject.pdb
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Debug\MySql.Data.dll
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Debug\MySql.Data.xml
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.csprojResolveAssemblyReference.cache
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.csproj.GenerateResource.Cache
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.exe
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.pdb
