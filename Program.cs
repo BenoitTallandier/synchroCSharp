@@ -21,7 +21,8 @@ namespace WindowsFormsApplication1
                     select nic.GetPhysicalAddress().ToString()
                 ).FirstOrDefault();
             BDDConnection.openConnection();
-            MessageBox.Show(" datetime : " + DateTime.Now);
+            User benoit = new User(macAddr);
+            MessageBox.Show(benoit.toString());
            /* Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());*/

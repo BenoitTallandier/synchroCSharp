@@ -55,19 +55,20 @@ namespace WindowsFormsApplication1
             }
         }
 
-        static public List<String> getUser()
-        {
-            List<String> user = new List<string>();
-            MySqlCommand cmd = new MySqlCommand("SELECT nameUser FROM users", connection);
+        static public Tuple<int,String,int,DateTime> getInfos(String mac){
+            Tuple<int,String,int,DateTime> infos = null;
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM mac WHERE adressMac='" + mac + "'", connection);
             MySqlDataReader dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
+            if(dataReader.Read())
             {
-                user.Add(""+dataReader["nameUser"]);
+                String date = dataReader["subscription"].ToString();
+                DateTime dt = Convert.ToDateTime(date);
+                infos = new Tuple<int,string,int,DateTime>(Convert.ToInt32(dataReader["idMac"]),mac,Convert.ToInt16(dataReader["isBan"]),dt);  
             }
-            dataReader.Close();
-            return user;
+            return infos;
         }
 
+        
         static public bool islog(String mac)
         {
             bool retour = false;
