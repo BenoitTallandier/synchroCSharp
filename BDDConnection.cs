@@ -65,9 +65,18 @@ namespace WindowsFormsApplication1
                 DateTime dt = Convert.ToDateTime(date);
                 infos = new Tuple<int,string,int,DateTime>(Convert.ToInt32(dataReader["idMac"]),mac,Convert.ToInt16(dataReader["isBan"]),dt);  
             }
+            dataReader.Close();
             return infos;
         }
 
+        static public void addServer(User user, string addressServer, string nameServer, string userServeur, string pass)
+        {
+            String query = "INSERT INTO server (`nameServer`,`userServer`,`passServer`,`adressServer`,`idUser`) VALUES('" + nameServer + "','" + userServeur + "','" + pass + "','"+addressServer+"','" + user.getId() + "')";
+            MySqlCommand cmd = new MySqlCommand(query,connection);
+            MessageBox.Show(query);
+            cmd.ExecuteNonQuery();
+            
+        }
         
         static public bool islog(String mac)
         {

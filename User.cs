@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 
 namespace WindowsFormsApplication1
 {
-    class User
+    public class User
     {
         private DateTime sub;
         private int id;
@@ -24,6 +24,11 @@ namespace WindowsFormsApplication1
                 else { isBan = false; }
                 sub = infos.Item4;
             }
+        }
+
+        public int getId()
+        {
+            return id;
         }
 
         public String toString()

@@ -10,6 +10,7 @@ namespace WindowsFormsApplication1
 {
     class Ftp
     {
+        private Form1 form;
         private string host = null;
         private string user = null;
         private string pass = null;
@@ -18,13 +19,14 @@ namespace WindowsFormsApplication1
         private Stream ftpStream = null;
         private int bufferSize = 2048;
         /* Construct Object */
-        public Ftp(string hostIP, string userName, string password) { host = hostIP; user = userName; pass = password; }
+        public Ftp(string hostIP, string userName, string password, Form1 form) { host = hostIP; user = userName; pass = password; this.form = form; }
 
         /* Download File */
         public void download(string remoteFile, string localFile)
         {
             try
             {
+                long fileSize = getFileSize(remoteFile);
                 /* Create an FTP Request */
                 ftpRequest = (FtpWebRequest)FtpWebRequest.Create(host + "/" + remoteFile);
                 /* Log in to the FTP Server with the User Name and Password Provided */
@@ -44,13 +46,19 @@ namespace WindowsFormsApplication1
                 /* Buffer for the Downloaded Data */
                 byte[] byteBuffer = new byte[bufferSize];
                 int bytesRead = ftpStream.Read(byteBuffer, 0, bufferSize);
-                /* Download the File by Writing the Buffered Data Until the Transfer is Complete */
+                int bytes = 0;
+                /* Download the File by Writing the Buffered Data Until the Transfer is Complete */               
                 try
                 {
                     while (bytesRead > 0)
                     {
                         localFileStream.Write(byteBuffer, 0, bytesRead);
                         bytesRead = ftpStream.Read(byteBuffer, 0, bufferSize);
+                        bytes += bytesRead;
+                        int totalSize = (int)(fileSize) / 1000; // Kbytes
+                        int per = (bytes / 1000) * 100 / totalSize;
+                        //MessageBox.Show(""+(bytes / 1000) * 100 / totalSize+"%");
+                        form.backgroundWorker1.ReportProgress(per);
                     }
                 }
                 catch (Exception ex) { Console.WriteLine(ex.ToString()); }

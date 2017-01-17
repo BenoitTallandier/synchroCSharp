@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using System.Net.NetworkInformation;
 
 namespace WindowsFormsApplication1
 {
@@ -14,18 +13,11 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
-            var macAddr =
-                (
-                    from nic in NetworkInterface.GetAllNetworkInterfaces()
-                    where nic.OperationalStatus == OperationalStatus.Up
-                    select nic.GetPhysicalAddress().ToString()
-                ).FirstOrDefault();
+
             BDDConnection.openConnection();
-            User benoit = new User(macAddr);
-            MessageBox.Show(benoit.toString());
-           /* Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());*/
+            Application.Run(new Form1());
             BDDConnection.closeConnection();
          
         }
