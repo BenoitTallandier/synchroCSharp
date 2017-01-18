@@ -12,8 +12,10 @@ namespace WindowsFormsApplication1
     public partial class AddServer : Form
     {
         private User user;
-        public AddServer(User u)
+        private Main form;
+        public AddServer(User u, Main f)
         {
+            this.form = f;
             this.user = u;
             InitializeComponent();
         }
@@ -26,6 +28,7 @@ namespace WindowsFormsApplication1
         private void ok_Click(object sender, EventArgs e)
         {
             BDDConnection.addServer(user, adressServer.Text, nameServer.Text, userServer.Text, passServer.Text);
+            form.reloadServer();
             this.Close();
         }
 

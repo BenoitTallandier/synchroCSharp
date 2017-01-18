@@ -7,5 +7,6 @@ C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.csproj.GenerateResource.Cache
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.exe
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\ftpProject.pdb
-C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.AddServer.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.askKey.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Debug\WindowsFormsApplication1.Main.resources

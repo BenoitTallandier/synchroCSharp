@@ -1,3 +1,11 @@
-C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\WindowsFormsApplication1.Form1.resources
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\ftpProject.csproj.GenerateResource.Cache
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Release\ftpProject.exe
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Release\ftpProject.pdb
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Release\MySql.Data.dll
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\bin\Release\MySql.Data.xml
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\WindowsFormsApplication1.AddServer.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\ftpProject.exe
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\ftpProject.pdb
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\WindowsFormsApplication1.askKey.resources
+C:\Users\benoit\Documents\Visual Studio 2010\Projects\ftpProject\ftpProject\obj\x86\Release\WindowsFormsApplication1.Main.resources

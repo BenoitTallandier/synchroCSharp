@@ -9,48 +9,56 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using Microsoft.VisualBasic;
-using System.Net.NetworkInformation;
 
 namespace WindowsFormsApplication1
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public User user;   
+        private User user;   
         private List<String> aDl = new List<String>();
-
-        public Form1()
+        private List<Server> listServer = new List<Server>();
+        private int indexServ = 0;
+        private bool pauseBW = false;
+        private bool breakBW = false;
+        public Main(User user)
         {
-            var macAddr =(
-                    from nic in NetworkInterface.GetAllNetworkInterfaces()
-                    where nic.OperationalStatus == OperationalStatus.Up
-                    select nic.GetPhysicalAddress().ToString()
-                ).FirstOrDefault();
-            user = new User(macAddr);
+            this.user = user;
+            
             InitializeComponent();
+
+            if (user.getId() < 0)
+            {
+                login.Text = "Guest";
+            }
+            else
+            {
+                login.Text = user.getMac();                
+            }
+            timeLeft.Text = user.getTimeLeftString();
+            reloadServer();
          }
 
+        public void reloadServer()
+        {
+            listServer= BDDConnection.getServer(user);
+            server.Items.Clear();
+            foreach (Server s in listServer)
+            {
+                server.Items.Add(s.getName());
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
         }
 
+        
 
         private void addServer(object sender, EventArgs e)
         {
-            AddServer form = new AddServer(user);
+            AddServer form = new AddServer(user,this);
             form.Show();
         }
 
-        private void button_Click_1(object sender, EventArgs e)
-        {
-
-            DirectoryInfo diTop = new DirectoryInfo(@"C:\Users\benoit\Documents\My Games\FarmingSimulator2017\mods");
-            String total = "";
-            foreach (var fi in diTop.EnumerateFiles())
-            {
-                total = total + fi.Name + "  " +fi.Length.ToString("N0")+ "\n";
-            }        
-            contentFtp.Text = total;
-        }
 
         private void label1_Click_1(object sender, EventArgs e)
         {
@@ -67,13 +75,16 @@ namespace WindowsFormsApplication1
 
         private void synchronize_Click(object sender, EventArgs e)
         {
+            aDl.Clear();
             DirectoryInfo diTop = new DirectoryInfo(@"C:\Users\benoit\Documents\My Games\FarmingSimulator2017\mods");
             foreach (var fi in diTop.EnumerateFiles())
             {
 //                total = total + fi.Name + "  " +fi.Length.ToString("N0")+ "\n";
             }
             String path = "public_html/save/";
-            Ftp ftpClient = new Ftp("ftp://en3rgie5.com", "tellisdu13@en3rgie5.com", "Tellisdu13",this);
+            Server ser = listServer[indexServ];
+            Ftp ftpClient = new Ftp(ser.getAdress(), ser.getUser(), ser.getPass(),this);
+//            Ftp ftpClient = new Ftp("ftp://en3rgie5.com", "tellisdu13@en3rgie5.com", "Tellisdu13", this);
 
             string[] simpleDirectoryListing = ftpClient.directoryListSimple(path);
             Boolean find = false;
@@ -118,12 +129,14 @@ namespace WindowsFormsApplication1
 
         private void telechargement_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         public void changeProgressBar(int per)
@@ -134,7 +147,7 @@ namespace WindowsFormsApplication1
         public void resetProgressBar()
         {
             progressBar1.Value = 0;
-            perProgressBar.Text = "100 %";
+            perProgressBar.Text = "";
         }
 
 
@@ -178,21 +191,30 @@ namespace WindowsFormsApplication1
                     /* Buffer for the Downloaded Data */
                     byte[] byteBuffer = new byte[bufferSize];
                     int bytesRead = ftpStream.Read(byteBuffer, 0, bufferSize);
-                    int bytes = 0;
+                    long bytes = 0;
                     int totalSize = (int)(fileSize); // Kbytes
                     /* Download the File by Writing the Buffered Data Until the Transfer is Complete */
                     try
                     {
                         while (bytesRead > 0)
                         {
+                            while (pauseBW)
+                            {
+                            }
+                            if (breakBW)
+                            {
+                                breakBW = false;
+                                e.Cancel = true;
+                                break;
+                            }
                             localFileStream.Write(byteBuffer, 0, bytesRead);
                             bytesRead = ftpStream.Read(byteBuffer, 0, bufferSize);
                             bytes += bytesRead;
-                            int pourcentage = (bytes * 100 / totalSize);
-                            worker.ReportProgress(pourcentage);
+                            long pourcentage = (bytes * 100 / totalSize);
+                            worker.ReportProgress(Convert.ToInt32(pourcentage));
                         }
-                        
-                        worker.ReportProgress(100,file);
+                        label2.Invoke(new Action(() => { log.AppendText(file + "   OK" + Environment.NewLine); }));
+                        label2.Invoke(new Action(() => { log.Refresh(); })); worker.ReportProgress(100);
                     }
                     catch (Exception ex) { MessageBox.Show(""+ex); }
                     /* Resource Cleanup */
@@ -206,6 +228,8 @@ namespace WindowsFormsApplication1
             //aDl.Clear();
         }
 
+
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             resetProgressBar();
@@ -213,8 +237,49 @@ namespace WindowsFormsApplication1
 
         public void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            changeProgressBar(e.ProgressPercentage);
+             changeProgressBar(e.ProgressPercentage);
+           
         }
+
+
+        private void login_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void server_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            indexServ = ((ListBox)sender).SelectedIndex;
+            if(indexServ>=0 && indexServ< listServer.Count()){
+                nameServer.Text = listServer[indexServ].getName();
+            }
+        }
+
+        private void pauseBt_Click(object sender, EventArgs e)
+        {
+            if (pauseBW)
+            {
+                pauseBW = false;
+                pauseBt.Text = "Pause";
+            }
+            else
+            {
+                pauseBW = true;
+                pauseBt.Text = "Resume";
+            }
+        }
+
+        private void breakBt_Click(object sender, EventArgs e)
+        {
+            breakBW = true;
+        }
+
         
     }
 }

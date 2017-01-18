@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1
 {
     class Ftp
     {
-        private Form1 form;
+        private Main form;
         private string host = null;
         private string user = null;
         private string pass = null;
@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
         private Stream ftpStream = null;
         private int bufferSize = 2048;
         /* Construct Object */
-        public Ftp(string hostIP, string userName, string password, Form1 form) { host = hostIP; user = userName; pass = password; this.form = form; }
+        public Ftp(string hostIP, string userName, string password, Main form) { host = hostIP; user = userName; pass = password; this.form = form; }
 
         /* Download File */
         public void download(string remoteFile, string localFile)
@@ -276,7 +276,7 @@ namespace WindowsFormsApplication1
                 try { string[] directoryList = directoryRaw.Split("|".ToCharArray()); return directoryList; }
                 catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             /* Return an Empty string Array if an Exception Occurs */
             return new string[] { "" };
         }

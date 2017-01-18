@@ -71,22 +71,32 @@
     <Compile Include="AddServer.Designer.cs">
       <DependentUpon>AddServer.cs</DependentUpon>
     </Compile>
-    <Compile Include="BDDConnection.cs" />
-    <Compile Include="Ftp.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="askKey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="askKey.Designer.cs">
+      <DependentUpon>askKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BDDConnection.cs" />
+    <Compile Include="Ftp.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="AddServer.resx">
       <DependentUpon>AddServer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="askKey.resx">
+      <DependentUpon>askKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
